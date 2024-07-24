@@ -34,13 +34,29 @@ source venv/bin/activate
 - `NIAH_MODEL_API_KEY` - API key for interacting with the model. Depending on the provider, this gets used appropriately with the correct sdk.
 - `NIAH_EVALUATOR_API_KEY` - API key to use if `openai` evaluation strategy is used.
 
-### Install Package
+Easy way to set env variables:
+- Open venv/bin/activate with text editor
+```zsh
+nano venv/bin/activate
+```
+- At the end of the file add environment variables:
+```zsh
+export NIAH_MODEL_API_KEY="{your token}"
+export NIAH_EVALUATOR_API_KEY="{your token}"
+```
+### Installation
 
-Install the package from PyPi:
+1. Fork and clone the repository.
+2. Create and activate the virtual environment as described above.
+3. Set the environment variables as described above.
+4. Install the package in editable mode by running the following command from repository root:
 
 ```zsh
-pip install needlehaystack
+pip install -e .
 ```
+
+The package `needlehaystack` is available for import in your test cases. Develop, make changes and test locally.
+
 
 ### Run Test
 
@@ -56,6 +72,12 @@ You can then run the analysis on OpenAI, Anthropic, or HuggingFace models with t
 Additionally, `LLMNeedleHaystackTester` parameters can also be passed as command line arguments, except `model_to_test` and `evaluator`.
 
 Here are some example use cases.
+
+Following command runs Bielik-7B-Instruct-v0.1-GPTQ 15 times. On 3 context lengths 1024, 2048, 4096 and 5 depths 0, 25, 50, 75, 100.
+
+```zsh
+needlehaystack.run_test --provider huggingface --model_name "speakleash/Bielik-7B-Instruct-v0.1-GPTQ" --context_lengths "[1024, 2048, 4096]" --document_depth_percent_intervals 5
+```
 
 Following command runs the test for openai model `gpt-3.5-turbo-0125` for a single context length of 2000 and single document depth of 50%.
 
@@ -75,18 +97,6 @@ Following command runs the test for anthropic model `mistralai/Mistral-7B-Instru
 needlehaystack.run_test --provider huggingface --model_name "mistralai/Mistral-7B-Instruct-v0.2" --document_depth_percents "[50]" --context_lengths "[2000]"
 ```
 
-### For Contributors
-
-1. Fork and clone the repository.
-2. Create and activate the virtual environment as described above.
-3. Set the environment variables as described above.
-4. Install the package in editable mode by running the following command from repository root:
-
-```zsh
-pip install -e .
-```
-
-The package `needlehaystack` is available for import in your test cases. Develop, make changes and test locally.
 
 ## `LLMNeedleHaystackTester` parameters:
 
