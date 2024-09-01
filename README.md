@@ -49,7 +49,8 @@ export NIAH_EVALUATOR_API_KEY="{your token}"
 1. Fork and clone the repository.
 2. Create and activate the virtual environment as described above.
 3. Set the environment variables as described above.
-4. Install the package in editable mode by running the following command from repository root:
+4. Install pytorch version compatible with your setup.
+5. Install the package in editable mode by running the following command from repository root:
 
 ```zsh
 pip install -e .
