@@ -3,6 +3,7 @@ import glob
 import json
 import os
 import time
+import torch
 
 import numpy as np
 
@@ -154,6 +155,9 @@ class LLMNeedleHaystackTester:
 
         # Go see if the model can answer the question to pull out your random fact
         response = await self.model_to_test.evaluate_model(prompt)
+
+        del prompt
+        torch.cuda.empty_cache()
 
         test_end_time = time.time()
         test_elapsed_time = test_end_time - test_start_time
